@@ -146,7 +146,7 @@ git push -u origin main
 ✔️ Upload de imagens  
 ✔️ Link externo e GitHub nos projetos  
 ✔️ Área pública + administrativa  
-✔️ Pronto para apresentar a recrutadores  
+✔️ Pronto para apresentação  
 
 ---
 
