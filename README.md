@@ -1,7 +1,7 @@
 
 # 🚀 Portfólio Pessoal em Laravel 11
 
-Projeto de portfólio pessoal desenvolvido com foco em conquistar a primeira vaga com PHP/Laravel. Inclui autenticação, CRUD com upload de imagem, link externo e GitHub.
+Projeto de portfólio pessoal. Inclui autenticação, CRUD com upload de imagem, link externo e GitHub.
 
 ---
 
@@ -146,8 +146,8 @@ git push -u origin main
 ✔️ Upload de imagens  
 ✔️ Link externo e GitHub nos projetos  
 ✔️ Área pública + administrativa  
-✔️ Pronto para apresentação  
+  
 
 ---
 
-**Desenvolvido por:** Jeferson Gabriel
+
