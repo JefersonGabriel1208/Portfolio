@@ -52,9 +52,19 @@
                 </a>
             @endif
 
+            @if (Route::has('register'))
+            <x-primary-button>
+            <a href="{{ route('register') }}">Registrar</a>
+            </x-primary-button>
+            @endif
+
+
+
             <x-primary-button class="ms-3 bg-blue-600 hover:bg-blue-700 text-white">
                 {{ __('Entrar') }}
             </x-primary-button>
+
+
         </div>
     </form>
 </x-guest-layout>
