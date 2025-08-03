@@ -38,5 +38,10 @@
             </a>
         </div>
 
+        {{-- Exemplo seguro para mostrar nome do usuário logado, se quiser --}}
+        @if(auth()->check())
+            <p class="mt-6 text-sm text-gray-400">Olá, {{ auth()->user()->name }}</p>
+        @endif
+
     </div>
 @endsection

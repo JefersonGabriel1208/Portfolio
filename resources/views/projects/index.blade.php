@@ -7,7 +7,7 @@
         <h1 class="text-2xl font-bold mb-4">Meus Projetos</h1>
 
         {{-- Botão para criar novo projeto --}}
-        <a href="{{ route('projects.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block">
+        <a href="{{route('projects.create')}}" class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block">
             Criar novo projeto
         </a>
 
