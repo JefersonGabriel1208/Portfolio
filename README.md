@@ -69,26 +69,21 @@ npm run dev
 
 ## 📸 Telas do Projeto
 
-- ### Página Inicial
 
-  ![Home](/home/jeferson/PHP/portfolio/Portfolio/prints/home.png)
+### Página Inicial
+![Home](prints/home.png)
 
-  ### Página de Detalhes (Show)
+### Página de Detalhes (Show)
+![Show](prints/show.png)
 
-  ![Show](/home/jeferson/PHP/portfolio/Portfolio/prints/show.png)
+### Listagem de Projetos (Admin)
+![Admin List](prints/admin-list.png)
 
-  ### Listagem de Projetos (Admin)
+### Cadastro de Projeto
+![Create](prints/create.png)
 
-  ![Admin List](/home/jeferson/PHP/portfolio/Portfolio/prints/admin-list.png)
-
-  ### Cadastro de Projeto
-
-  ![Create](/home/jeferson/PHP/portfolio/Portfolio/prints/create.png)
-
-  ### Dashboard após Login
-
-  ![Dashboard](/home/jeferson/PHP/portfolio/Portfolio/prints/dashboard.png)
-
+### Dashboard após Login
+![Dashboard](prints/dashboard.png)
 ---
 
 ---
