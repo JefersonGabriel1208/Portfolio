@@ -1,153 +1,113 @@
-
-# 🚀 Portfólio Pessoal em Laravel 11
+# 🚀 Portfólio Pessoal em Laravel 12
 
 Projeto de portfólio pessoal. Inclui autenticação, CRUD com upload de imagem, link externo e GitHub.
 
 ---
 
-## ✅ Tecnologias utilizadas
+## 🚀 Tecnologias Utilizadas
 
+- Laravel 12
 - PHP 8.2
-- Laravel 11
-- Laravel Breeze (login/cadastro)
-- MySQL
-- Blade (Laravel Views)
 - Tailwind CSS
-- Vite
-- NPM
+- Blade (sistema de templates do Laravel)
+- Laravel Breeze (autenticação)
+- MySQL ou SQLite
+- Vite (build frontend)
 
 ---
 
-## 📌 Passo a passo do desenvolvimento
+## 🎯 Objetivo
 
-### 1. Criação do Projeto Laravel
+Desenvolver um portfólio pessoal em **Laravel** com autenticação segura e painel administrativo para gerenciar projetos, permitindo cadastro, edição, exclusão e exibição pública, com layout moderno em **tema escuro** e suporte a upload de imagens e links externos.
+
+---
+
+## ⚙️ Instalação e Execução
+
+1. Clone o repositório:
+
 ```bash
-composer create-project laravel/laravel portfolio
-cd portfolio
+git clone https://github.com/JefersonGabriel1208/Portfolio4.git
+cd Portfolio4
 ```
 
-### 2. Instalação do Breeze (Autenticação)
+2. Instale as dependências PHP e JavaScript:
+
 ```bash
-composer require laravel/breeze --dev
-php artisan breeze:install blade
+composer install
 npm install
+```
+
+3. Copie o arquivo `.env`:
+
+```bash
+cp .env.example .env
+```
+
+4. Gere a chave da aplicação:
+
+```bash
+php artisan key:generate
+```
+
+5. Configure o banco de dados no `.env` e execute as migrações:
+
+```bash
+php artisan migrate
+```
+
+6. Rode o servidor e o build frontend:
+
+```bash
+php artisan serve
 npm run dev
 ```
 
-### 3. Configuração do Banco de Dados (.env)
-```
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=portfolio
-DB_USERNAME=root
-DB_PASSWORD=
-```
-Criação do banco via phpMyAdmin e depois:
-```bash
-php artisan migrate
-```
-
-### 4. Criar Model, Controller e Migration para Projetos
-```bash
-php artisan make:model Project -m
-php artisan make:controller ProjectController --resource
-```
-
-### 5. Estrutura da tabela (Migration)
-- title (string)
-- description (text)
-- image (string, nullable)
-- url (string, nullable)
-- github_url (string, nullable)
-```bash
-php artisan migrate
-```
-
-### 6. Criar Rotas no web.php
-- Rotas públicas para home
-- Rotas protegidas para CRUD de projetos (usando middleware auth)
-- Route resource para ProjectController
-
-### 7. Criar as Views Blade
-- `home.blade.php`
-- `projects/index.blade.php`
-- `projects/create.blade.php`
-- `projects/edit.blade.php`
-- `projects/show.blade.php`
-
-### 8. Implementar os Métodos no Controller
-- index()
-- create()
-- store()
-- edit()
-- update()
-- destroy()
-- show()
-
-Incluindo upload de imagens, validação e manipulação de arquivos.
-
-### 9. Melhorar a Dashboard (Área Administrativa)
-Arquivo: `resources/views/dashboard.blade.php`
-
-Adicionamos links úteis:
-- Criar Projeto
-- Listar Projetos
-- Voltar ao Portfólio Público
-
-### 10. Limpar Cache de Views (se necessário)
-```bash
-php artisan view:clear
-```
-
-### 11. Rodar Build de Produção
-```bash
-npm run build
-```
-
-### 12. Versionamento no GitHub
-```bash
-git init
-git add .
-git commit -m "Projeto Portfólio Laravel finalizado"
-git branch -M main
-git remote add origin https://github.com/SEU_USUARIO/portfolio-laravel.git
-git push -u origin main
-```
-
-### 13. Adicionar README com prints
-- Criar pasta `prints/`
-- Colocar imagens das telas
-- Referenciar no README conforme abaixo:
+7. Acesse no navegador: `http://localhost:8000`
 
 ---
 
-## 🎨 Prints de tela:
+## 📸 Telas do Projeto
 
-### Página Inicial (Home)
-![Home](./prints/home.png)
+- ### Página Inicial 
 
-### Página de Detalhes (Show)
-![Show](./prints/show.png)
+  ![Home](/home/jeferson/PHP/portfolio/Portfolio/prints/home.png)
 
-### Listagem de Projetos (Admin)
-![Admin List](./prints/admin-list.png)
+  ### Página de Detalhes (Show)
 
-### Cadastro de Projeto
-![Create](./prints/create.png)
+  ![Show](/home/jeferson/PHP/portfolio/Portfolio/prints/show.png)
 
-### Dashboard após Login
-![Dashboard](./prints/dashboard.png)
+  ### Listagem de Projetos (Admin)
 
----
+  ![Admin List](/home/jeferson/PHP/portfolio/Portfolio/prints/admin-list.png)
 
-## ✅ Status Final
-✔️ CRUD completo  
-✔️ Upload de imagens  
-✔️ Link externo e GitHub nos projetos  
-✔️ Área pública + administrativa  
-  
+  ### Cadastro de Projeto
+
+  ![Create](/home/jeferson/PHP/portfolio/Portfolio/prints/create.png)
+
+  ### Dashboard após Login
+
+  ![Dashboard](/home/jeferson/PHP/portfolio/Portfolio/prints/dashboard.png)
 
 ---
 
+---
 
+## 📧 Configuração de Envio de E-mails
+
+No arquivo `.env`, configure:
+
+```
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=seuemail@gmail.com
+MAIL_PASSWORD=suasenhasecreta
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=seuemail@gmail.com
+MAIL_FROM_NAME="Seu Nome"
+```
+
+Lembre-se de ativar "acesso a apps menos seguros" no Gmail ou usar uma senha de app.
+
+## 

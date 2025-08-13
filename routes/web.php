@@ -12,9 +12,6 @@ Route::get('/', function () {
     return view('home', compact('projects'));
 });
 
-// Rota pública para ver detalhes do projeto
-Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
-
 // Rotas de registro de usuários (públicas)
 Route::get('/register', [RegisteredUserController::class, 'create'])
     ->middleware('guest')
@@ -23,11 +20,6 @@ Route::get('/register', [RegisteredUserController::class, 'create'])
 Route::post('/register', [RegisteredUserController::class, 'store'])
     ->middleware('guest');
 
-// Dashboard (somente para logados)
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 // Rotas protegidas (somente para logados)
 Route::middleware(['auth'])->group(function () {
     // Perfil
@@ -35,8 +27,24 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // CRUD de projetos (exceto o show)
-    Route::resource('projects', ProjectController::class)->except(['show']);
+    // Dashboard
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    // Rotas de CRUD de projetos (manuais)
+    // A rota de criação precisa vir antes da rota de exibição de projetos individuais.
+    Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
+    Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
+    Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
+    Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
+    Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
+    Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 });
+
+// A rota pública para ver detalhes de um projeto (mais genérica)
+// deve vir depois das rotas mais específicas.
+Route::get('/projects/{project}', [ProjectController::class, 'show'])
+    ->name('projects.show');
 
 require __DIR__.'/auth.php';

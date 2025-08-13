@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
-    // Lista todos os projetos
+    // Lista todos os projetos (somente para usuários autenticados)
     public function index()
     {
         $projects = Project::latest()->get();
@@ -42,17 +42,14 @@ class ProjectController extends Controller
     }
 
     // Mostra formulário de edição
-    public function edit($id)
+    public function edit(Project $project)
     {
-        $project = Project::findOrFail($id);
         return view('projects.edit', compact('project'));
     }
 
     // Atualiza projeto existente
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project)
     {
-        $project = Project::findOrFail($id);
-
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -74,10 +71,8 @@ class ProjectController extends Controller
     }
 
     // Deleta um projeto
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        $project = Project::findOrFail($id);
-
         if ($project->image) {
             Storage::disk('public')->delete($project->image);
         }
@@ -87,10 +82,9 @@ class ProjectController extends Controller
         return redirect()->route('projects.index')->with('success', 'Projeto removido com sucesso!');
     }
 
-    // Exibe detalhes do projeto
-    public function show($id)
+    // Exibe detalhes do projeto (público)
+    public function show(Project $project)
     {
-        $project = Project::findOrFail($id);
         return view('projects.show', compact('project'));
     }
 }
