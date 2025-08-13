@@ -69,7 +69,7 @@ npm run dev
 
 ## 📸 Telas do Projeto
 
-- ### Página Inicial 
+- ### Página Inicial
 
   ![Home](/home/jeferson/PHP/portfolio/Portfolio/prints/home.png)
 
