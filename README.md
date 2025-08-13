@@ -110,4 +110,4 @@ MAIL_FROM_NAME="Seu Nome"
 
 Lembre-se de ativar "acesso a apps menos seguros" no Gmail ou usar uma senha de app.
 
-## 
+## ##
