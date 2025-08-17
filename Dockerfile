@@ -18,11 +18,13 @@ RUN apt-get update && apt-get install -y \
 
 # composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
-# Dependências PHP somente para o build do vendor (composer)
-# (Não precisa instalar extensões aqui; faremos no runtime)
+# Instala vendors sem rodar scripts (pois ainda não copiamos o app inteiro)
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --prefer-dist --no-interaction --no-progress
+RUN composer install --no-dev --prefer-dist --no-interaction --no-progress --no-scripts
+
+# Agora copiamos o código da aplicação
 COPY . .
 
 # -------- Stage 3: imagem final de runtime -----------------
@@ -37,7 +39,6 @@ RUN apt-get update && apt-get install -y \
  && rm -rf /var/lib/apt/lists/*
 
 # Extensões PHP necessárias para Laravel
-# (pdo já vem no core; instale apenas pdo_mysql, mbstring, bcmath, zip)
 RUN docker-php-ext-install pdo_mysql mbstring bcmath zip
 
 # Copia app + vendor + build do front
