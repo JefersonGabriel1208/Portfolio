@@ -13,7 +13,7 @@ WORKDIR /app
 # Pacotes do sistema para compilar extensões e rodar composer
 RUN apt-get update && apt-get install -y \
     git curl unzip pkg-config \
-    libonig-dev libzip-dev \
+    libonig-dev libzip-dev libpq-dev \
  && rm -rf /var/lib/apt/lists/*
 
 # composer
@@ -35,11 +35,11 @@ ENV PORT=10000
 # Pacotes do sistema necessários em runtime
 RUN apt-get update && apt-get install -y \
     git curl unzip pkg-config \
-    libonig-dev libzip-dev \
+    libonig-dev libzip-dev libpq-dev \
  && rm -rf /var/lib/apt/lists/*
 
-# Extensões PHP necessárias para Laravel
-RUN docker-php-ext-install pdo_mysql mbstring bcmath zip
+# Extensões PHP necessárias para Laravel (inclui MySQL e PostgreSQL)
+RUN docker-php-ext-install pdo_mysql pdo_pgsql mbstring bcmath zip
 
 # Copia app + vendor + build do front
 COPY --from=build-php /app /app
