@@ -1,19 +1,32 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 set -e
 
-# Ajusta permissões (evita erro ao escrever cache/logs)
+# Aguarda dependências ficarem disponíveis (útil para DB remoto)
+# Se quiser, habilite um check simples aqui.
+
+# Garante permissões (não falha se não existirem)
+mkdir -p storage/framework/{cache,sessions,views} || true
+mkdir -p bootstrap/cache || true
 chmod -R 775 storage bootstrap/cache || true
 
-# Gera APP_KEY se não existir
-if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "base64:" ]; then
-  php artisan key:generate --force || true
-fi
+# Otimizações e cache limpos (evita config antiga)
+php artisan config:clear || true
+php artisan cache:clear || true
+php artisan route:clear || true
+php artisan view:clear || true
 
-# Cria symlink do storage (ignora se já existir)
+# APP KEY (se faltar em produção)
+php artisan key:generate --force || true
+
+# Link de storage (ignora se já existir)
 php artisan storage:link || true
 
-# Migrações (se o DB não estiver pronto, não derruba o container)
+# Migrações (modo produção exige --force)
 php artisan migrate --force || true
 
-# Inicia o servidor embutido do PHP apontando para /public
-php -S 0.0.0.0:${PORT:-10000} -t public
+# (Opcional) seed inicial
+# php artisan db:seed --force || true
+
+# Sobe o servidor embutido do PHP apontando para a public/
+php -S 0.0.0.0:$PORT -t public
+

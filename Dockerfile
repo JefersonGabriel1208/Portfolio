@@ -16,11 +16,11 @@ RUN apt-get update && apt-get install -y \
     libonig-dev libzip-dev libpq-dev \
  && rm -rf /var/lib/apt/lists/*
 
-# composer
+# Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
-# Instala vendors sem rodar scripts (pois ainda não copiamos o app inteiro)
+# Instala vendors sem rodar scripts (a app ainda não foi copiada toda)
 COPY composer.json composer.lock ./
 RUN composer install --no-dev --prefer-dist --no-interaction --no-progress --no-scripts
 
@@ -31,6 +31,7 @@ COPY . .
 FROM php:8.2-cli
 WORKDIR /app
 ENV PORT=10000
+ENV APP_ENV=production
 
 # Pacotes do sistema necessários em runtime
 RUN apt-get update && apt-get install -y \
@@ -38,7 +39,7 @@ RUN apt-get update && apt-get install -y \
     libonig-dev libzip-dev libpq-dev \
  && rm -rf /var/lib/apt/lists/*
 
-# Extensões PHP necessárias para Laravel (inclui MySQL e PostgreSQL)
+# Extensões PHP necessárias para Laravel (MySQL e PostgreSQL)
 RUN docker-php-ext-install pdo_mysql pdo_pgsql mbstring bcmath zip
 
 # Copia app + vendor + build do front
